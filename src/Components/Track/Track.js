@@ -14,15 +14,15 @@ class Track extends Component{
     this.props.onRemove(this.props.track);
   }
 
-   renderAction (removeTrigger){
-        if(removeTrigger===false){
-       return <a onClick={this.removeTrack} className='Track-action'>-</a>;
-     }else{
-       return <a onClick={this.addTrack} className='Track-action'>+</a>;
+  renderAction (removeTrigger){
+    if(removeTrigger===false){
+     return <a onClick={this.removeTrack} className='Track-action'>-</a>;
+    }else{
+     return <a onClick={this.addTrack} className='Track-action'>+</a>;
      }
    }
-  render(){
 
+  render(){
     return(
       <div className="Track">
         <div className="Track-information">
