@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       searchResults: [],
       playlistName: "New Playlist",
-      playlistTracks: []
+      playlistTracks: [],
+      class:'noWindow'
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -23,7 +24,9 @@ class App extends Component {
     this.search = this.search.bind(this);
     this.resetPlaylist = this.resetPlaylist.bind(this);
 
-  /*  this.openWindow = this.openWindow.bind(this);*/
+    this.closeWindow = this.closeWindow.bind(this);
+
+    this.openWindow = this.openWindow.bind(this);
 
   }
 
@@ -48,6 +51,7 @@ class App extends Component {
   }
 
   savePlaylist(){
+    this.openWindow();
     let trackURIs = this.state.playlistTracks.map(track => track.uri);
       Spotify.savePlaylist(this.state.playlistName, trackURIs)
       .then(() => {
@@ -55,14 +59,18 @@ class App extends Component {
         this.setState({playlistName: 'New Playlist', playlistTracks: []});
       }
     )
+    console.log(this.props.WindowClass);
 
   }
 
-/*  openWindow()
-  {
-    console.log(this.state);
-    SuccessWindow.setState('');
-  }*/
+  openWindow(){
+    this.setState({ class: 'SuccessWindow'})
+  }
+
+  closeWindow(){
+    this.setState({ class:'noWindow'});
+
+  }
 
   search(searchTerm) {
    Spotify.search(searchTerm)
@@ -82,7 +90,7 @@ class App extends Component {
         <div className="App">
           <SearchBar onSearch={this.search} />
             <div className="App-playlist">
-              <SuccessWindow onWindow={this.openWindow}/>
+              <SuccessWindow WindowClass={this.state.class} onClose={this.closeWindow}/>
               <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
               <Playlist tracks={this.state.playlistTracks} playlistName={this.state.playlistName}
               onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} onReset={this.resetPlaylist} />
