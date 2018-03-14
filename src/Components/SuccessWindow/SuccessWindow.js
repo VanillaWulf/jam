@@ -5,13 +5,21 @@ import './SuccessWindow.css';
 
    constructor(props){
      super(props);
-
+     this.renderHeader = this.renderHeader.bind(this);
      }
 
-render(){
+  renderHeader(isSaved){
+       if(isSaved=='1'){
+         return 'Playlist have been saved'
+       }else{
+         return 'Playlist have been reset'
+       }
+  }
+
+  render(){
      return(
        <div className={this.props.WindowClass}>
-        <h2 className="SuccessWindowHeader"> Playlist have been saved</h2>
+        <h2 className="SuccessWindowHeader"> {this.renderHeader(this.props.SaveTrigger)}</h2>
         <div className="buttons">
          <a className="SuccessWindow-b" onClick={this.props.onClose}>OK</a>
         </div>
