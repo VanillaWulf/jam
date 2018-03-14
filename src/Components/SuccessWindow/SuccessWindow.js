@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import './SuccessWindow.css';
 
  class SuccessWindow extends Component{
-
    constructor(props){
      super(props);
+
      this.renderHeader = this.renderHeader.bind(this);
      }
 
   renderHeader(isSaved){
-       if(isSaved=='1'){
-         return 'Playlist have been saved'
-       }else{
-         return 'Playlist have been reset'
-       }
+    if(isSaved=='1'){
+      return 'Playlist have been saved'
+    }else{
+      return 'Playlist have been reset'
+    }
   }
 
   render(){
