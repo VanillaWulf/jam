@@ -22,7 +22,9 @@ class SearchBar extends Component {
   }
 
   search(){
+    if(this.props.term){
     this.props.onSearch(this.state.term);
+    }
   }
 
   render() {
