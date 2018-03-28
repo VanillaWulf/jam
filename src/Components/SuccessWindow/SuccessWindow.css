@@ -9,6 +9,7 @@
   background-color: rgba(1, 12, 63);
   box-shadow: 0 4px 2px 2px #000000;
   text-align: center;
+  z-index:2;
 }
 .noWindow{
   display: none;

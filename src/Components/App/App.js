@@ -15,7 +15,8 @@ class App extends Component {
       playlistName: "New Playlist",
       playlistTracks: [],
       class:'noWindow',
-      SaveWindow: '1'
+      SaveWindow: '1',
+      overlay: "overlayNone"
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -24,9 +25,7 @@ class App extends Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     this.resetPlaylist = this.resetPlaylist.bind(this);
-
     this.closeWindow = this.closeWindow.bind(this);
-
     this.openWindow = this.openWindow.bind(this);
 
   }
@@ -52,24 +51,31 @@ class App extends Component {
   }
 
   savePlaylist(){
-    this.setState({ SaveWindow: '1'});
-    this.openWindow();
     let trackURIs = this.state.playlistTracks.map(track => track.uri);
+    console.log(this.state.playlistTracks);
+    if(this.state.playlistTracks.length!=0){
+      this.setState({ SaveWindow: '1'});
+      this.openWindow();
       Spotify.savePlaylist(this.state.playlistName, trackURIs)
       .then(() => {
         console.log(`new playlist with '${this.state.playlistName}' and ${trackURIs.length} songs successful saved.`);
         this.setState({playlistName: 'New Playlist', playlistTracks: []});
       }
     )
+  }else{
+    this.setState({ SaveWindow: '3'});
+    this.openWindow();
+  }
   }
 
   openWindow(){
-    this.setState({ class: 'SuccessWindow'})
+    this.setState({ class: 'SuccessWindow'});
+    this.setState({overlay:'overlayOpen'});
   }
 
   closeWindow(){
     this.setState({ class:'noWindow'});
-
+    this.setState({overlay:'overlayNone'});
   }
 
   search(searchTerm) {
@@ -80,7 +86,7 @@ class App extends Component {
   }
 
   resetPlaylist(){
-    this.setState({ SaveWindow: '0'});
+    this.setState({ SaveWindow: '2'});
     this.setState({playlistName: 'New Playlist', playlistTracks: []});
     this.openWindow();
   }
@@ -92,6 +98,7 @@ class App extends Component {
         <div className="App">
           <SearchBar onSearch={this.search} />
             <div className="App-playlist">
+            <div className={this.state.overlay}></div>
               <SuccessWindow WindowClass={this.state.class} onClose={this.closeWindow} SaveTrigger={this.state.SaveWindow}/>
               <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
               <Playlist tracks={this.state.playlistTracks} playlistName={this.state.playlistName}

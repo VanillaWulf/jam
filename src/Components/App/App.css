@@ -36,6 +36,7 @@ h2 {
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
   color: #fff;
+  position: relative;
 }
 
 .App-playlist {
@@ -49,4 +50,17 @@ h2 {
     align-items: center;
     flex-direction: column;
   }
+}
+
+.overlayOpen{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255,255,255,0.5);
+  top: 0;
+  left:0;
+}
+
+.overlayNone{
+  display: none;
 }

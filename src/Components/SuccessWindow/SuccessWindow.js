@@ -11,9 +11,12 @@ import './SuccessWindow.css';
   renderHeader(isSaved){
     if(isSaved=='1'){
       return 'Playlist have been saved'
-    }else{
+    }else if(isSaved=='2'){
       return 'Playlist have been reset'
+    }else if(isSaved=='3'){
+      return 'Nothing to save'
     }
+
   }
 
   render(){
@@ -23,7 +26,7 @@ import './SuccessWindow.css';
         <div className="buttons">
          <a className="SuccessWindow-b" onClick={this.props.onClose}>OK</a>
         </div>
-       </div>
+      </div>
      );
 
    }
