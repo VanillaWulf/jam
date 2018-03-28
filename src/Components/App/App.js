@@ -53,7 +53,7 @@ class App extends Component {
   savePlaylist(){
     let trackURIs = this.state.playlistTracks.map(track => track.uri);
     console.log(this.state.playlistTracks);
-    if(this.state.playlistTracks.length!=0){
+    if(this.state.playlistTracks.length!==0){
       this.setState({ SaveWindow: '1'});
       this.openWindow();
       Spotify.savePlaylist(this.state.playlistName, trackURIs)

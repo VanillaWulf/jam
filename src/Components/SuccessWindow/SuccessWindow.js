@@ -9,11 +9,11 @@ import './SuccessWindow.css';
      }
 
   renderHeader(isSaved){
-    if(isSaved=='1'){
+    if(isSaved==='1'){
       return 'Playlist have been saved'
-    }else if(isSaved=='2'){
+    }else if(isSaved==='2'){
       return 'Playlist have been reset'
-    }else if(isSaved=='3'){
+    }else if(isSaved==='3'){
       return 'Nothing to save'
     }
 
